@@ -5,6 +5,12 @@ print("=" * 40)
 print(APP_NAME, VERSION)
 print("=" * 40)
 
+from datetime import datetime
+
+def tell_time():
+    current_time = datetime.now()
+    print(f"\n 🕒 Current Time: {current_time.strftime('%I:%M:%S %p')}")
+
 name = input("What's your name? ")
 
 def greet(name):
@@ -32,7 +38,7 @@ if choice == "1":
     greet(name)
 
 elif choice == "2":
-    print("Current time feature coming soon...")
+    tell_time()
 
 elif choice == "3":
     print("Goodbye!")
