@@ -1,21 +1,17 @@
+from buddy.assistants import greet, tell_time, open_chrome
+
+
 APP_NAME = "Buddy AI"
-VERSION = "v0.5.0"
+VERSION = "v0.7.0"
 
 print("=" * 40)
 print(APP_NAME, VERSION)
 print("=" * 40)
 
-from datetime import datetime
 
-def tell_time():
-    current_time = datetime.now()
-    print(f"\n 🕒 Current Time: {current_time.strftime('%I:%M:%S %p')}")
+
 
 name = input("What's your name? ")
-
-def greet(name):
-    print(f"Hello, {name}! 👋")
-    print("Welcome to Buddy AI.")
 
 greet(name)
 
@@ -27,7 +23,7 @@ print()
 print("What would you like to do today?")
 print("1. say hello")
 print("2. tell time")
-print("3. Exit")
+print("3. open Google Chrome")
 print("4. Show Current Version")
 
 # user input for menu selection
@@ -41,7 +37,7 @@ elif choice == "2":
     tell_time()
 
 elif choice == "3":
-    print("Goodbye!")
+    open_chrome()
 
 elif choice == "4":
     print(f"Current version: {VERSION}")
