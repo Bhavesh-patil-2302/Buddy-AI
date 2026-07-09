@@ -1,8 +1,9 @@
-from buddy.assistants import greet, tell_time, open_chrome
+from buddy.assistants import greet, tell_time, open_chrome, open_application
+from buddy.commands import APPS
 
 
 APP_NAME = "Buddy AI"
-VERSION = "v0.8.0"
+VERSION = "v0.9.0"
 
 print("=" * 40)
 print(APP_NAME, VERSION)
@@ -25,6 +26,8 @@ print("1. say hello")
 print("2. tell time")
 print("3. open Google Chrome")
 print("4. Show Current Version")
+print("5. Open Applications")
+print("6. Show available apps")
 
 # user input for menu selection
 choice = input("Please enter the number of your choice: ")
@@ -42,5 +45,13 @@ elif choice == "3":
 elif choice == "4":
     print(f"Current version: {VERSION}")
 
+elif choice == "5":
+    app_name = input("Please enter the name of the application you want to open: ")
+    open_application(app_name)
+
+elif choice == "6":
+    print("Available apps:")
+    for app in APPS:
+        print(f" - {app}")
 else:
     print("Invalid choice!")
