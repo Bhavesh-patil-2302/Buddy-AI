@@ -2,7 +2,7 @@ from buddy.assistants import greet, tell_time, open_chrome
 
 
 APP_NAME = "Buddy AI"
-VERSION = "v0.7.0"
+VERSION = "v0.8.0"
 
 print("=" * 40)
 print(APP_NAME, VERSION)
