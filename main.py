@@ -11,7 +11,6 @@ print("=" * 40)
 
 
 
-
 name = input("What's your name? ")
 
 greet(name)

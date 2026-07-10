@@ -52,7 +52,7 @@ APPS = {
     "firefox": "firefox.exe",
 
     # Development
-    "vscode": "code",
+    "vscode": r"D:\Microsoft VS Code\Code.exe",
     "visual studio code": "code",
 
     # Microsoft Office
