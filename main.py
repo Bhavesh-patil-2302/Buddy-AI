@@ -3,7 +3,7 @@ from buddy.commands import APPS
 
 
 APP_NAME = "Buddy AI"
-VERSION = "v0.9.0"
+VERSION = "v1.0.0"
 
 print("=" * 40)
 print(APP_NAME, VERSION)
