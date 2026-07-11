@@ -1,5 +1,6 @@
 from buddy.assistants import greet, tell_time, open_chrome, open_application
 from buddy.commands import APPS
+from buddy.scanner.file_scanner import list_files
 
 
 APP_NAME = "Buddy AI"
@@ -27,6 +28,7 @@ print("3. open Google Chrome")
 print("4. Show Current Version")
 print("5. Open Applications")
 print("6. Show available apps")
+print("7. Scan files in a folder")
 
 # user input for menu selection
 choice = input("Please enter the number of your choice: ")
@@ -52,5 +54,9 @@ elif choice == "6":
     print("Available apps:")
     for app in APPS:
         print(f" - {app}")
+elif choice == "7":
+    path = input("Enter folder path: ")
+    list_files(path)
+
 else:
-    print("Invalid choice!")
+    print("Invalid choice. Please select a valid option from the menu.")

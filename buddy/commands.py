@@ -53,7 +53,7 @@ APPS = {
 
     # Development
     "vscode": r"D:\Microsoft VS Code\Code.exe",
-    "visual studio code": "code",
+    "visual studio code": r"D:\Microsoft VS Code\Code.exe",
 
     # Microsoft Office
     "word": "winword.exe",
