@@ -1,10 +1,11 @@
 from buddy.assistants import greet, tell_time, open_chrome, open_application
 from buddy.commands import APPS
 from buddy.scanner.file_scanner import list_files
+from buddy.memory.user_memory import save_user_data
 
 
 APP_NAME = "Buddy AI"
-VERSION = "v1.0.0"
+VERSION = "v1.1.1"
 
 print("=" * 40)
 print(APP_NAME, VERSION)
@@ -18,6 +19,8 @@ greet(name)
 
 age = input(f"How old are you, {name}? ")
 print(f"Wow, {age} years old! That's great to hear.")
+
+save_user_data(name, age)
 
 # main menu
 print()
