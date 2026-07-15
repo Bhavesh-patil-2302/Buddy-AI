@@ -1,7 +1,7 @@
-from buddy.assistants import greet, tell_time, open_chrome, open_application
+from buddy.assistants import greet, tell_time, open_chrome, open_application , greet_new_user
 from buddy.commands import APPS
 from buddy.scanner.file_scanner import list_files
-from buddy.memory.user_memory import save_user_data
+from buddy.memory.user_memory import save_user_data , load_user_data
 
 
 APP_NAME = "Buddy AI"
@@ -11,16 +11,26 @@ print("=" * 40)
 print(APP_NAME, VERSION)
 print("=" * 40)
 
+data=load_user_data()
+
+if data is not None:
+    name = data.get("name")
+    age = data.get("age")
+    greet(name)
+else:
+    print("Welcome to Buddy AI! Let's get to know you.")
+    name = input("What's your name? ")
+    age = int(input(f"How old are you, {name}? "))
+    save_user_data(name, age)
+    greet_new_user(name)
+    
+
+# greet(name)
 
 
-name = input("What's your name? ")
+# print(f"Wow, {age} years old! That's great to hear.")
 
-greet(name)
 
-age = input(f"How old are you, {name}? ")
-print(f"Wow, {age} years old! That's great to hear.")
-
-save_user_data(name, age)
 
 # main menu
 print()

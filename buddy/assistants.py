@@ -16,10 +16,15 @@ def open_chrome():
     print("Opening Google Chrome...")
 
 
-#greet  function
+#greet  function if user is not new
 def greet(name):
-    print(f"Hello, {name}! 👋")
-    print("Welcome to Buddy AI.")
+    print(f"Welcome Back, {name}! 👋")
+    print("What should I help You Today ?")
+
+#greet function if user is new
+def greet_new_user(name):
+    print(f"Welcome to Buddy AI, {name}! 👋")
+    print("What's Up !! I am Buddy AI, your personal assistant. I can help you with various tasks and make your life easier. Let's get started!")
 
 
 #Opening application

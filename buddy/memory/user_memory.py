@@ -1,5 +1,5 @@
 # user data is stored here
-from buddy.memory.storage_manager import save_json
+from buddy.memory.storage_manager import save_json , load_json
 
 
 def save_user_data(name, age):
@@ -8,3 +8,6 @@ def save_user_data(name, age):
         "age": age
     }
     save_json("buddy/data/user.json", user_data)
+
+def load_user_data():
+    return load_json("buddy/data/user.json")
