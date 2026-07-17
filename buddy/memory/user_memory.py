@@ -11,3 +11,4 @@ def save_user_data(name, age):
 
 def load_user_data():
     return load_json("buddy/data/user.json")
+

@@ -2,16 +2,28 @@ from buddy.assistants import greet, tell_time, open_chrome, open_application , g
 from buddy.commands import APPS
 from buddy.scanner.file_scanner import list_files
 from buddy.memory.user_memory import save_user_data , load_user_data
+from buddy.memory.settings_manager import load_settings
 
 
 APP_NAME = "Buddy AI"
-VERSION = "v1.1.1"
+VERSION = "v1.2.0"
 
-print("=" * 40)
-print(APP_NAME, VERSION)
-print("=" * 40)
+
+settings = load_settings()
+
+if settings.get("show_version"):
+    print("=" * 40)
+    print(APP_NAME, VERSION)
+    print("=" * 40)
+else:
+    print("=" * 40)
+    print(APP_NAME)
+    print("=" * 40)
+
+
 
 data=load_user_data()
+
 
 if data is not None:
     name = data.get("name")
@@ -21,15 +33,14 @@ else:
     print("Welcome to Buddy AI! Let's get to know you.")
     name = input("What's your name? ")
     age = int(input(f"How old are you, {name}? "))
+    print(f"Wow, {age} years old! That's great to hear.")
     save_user_data(name, age)
     greet_new_user(name)
     
-
-# greet(name)
-
-
-# print(f"Wow, {age} years old! That's great to hear.")
-
+if settings.get("show_time", True):
+    tell_time()
+else:
+    print("Hope you are having a good time !")
 
 
 # main menu
