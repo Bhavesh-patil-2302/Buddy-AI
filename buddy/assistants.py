@@ -3,12 +3,24 @@ from datetime import datetime
 import webbrowser
 import subprocess
 from buddy.commands import APPS
+from buddy.core.app_info import APP_NAME, VERSION
 
 #tell time function
 def tell_time():
     current_time = datetime.now()
     print(f"\n 🕒 Current Time: {current_time.strftime('%I:%M:%S %p')}")
 
+#opening banner if  user wants version to be shown
+def show_banner():
+    print("=" * 40)
+    print(APP_NAME, VERSION)
+    print("=" * 40)
+
+#opening banner if user does not want version to be shown
+def show_banner_without_version():
+    print("=" * 40)
+    print(APP_NAME)
+    print("=" * 40)
 
 #opening browser function
 def open_chrome():
