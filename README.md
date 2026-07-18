@@ -13,4 +13,4 @@ Buddy AI is my personal AI assistant project built from scratch using Python.
 
 ##  Current Version
 
-v1.1.1.1
+v1.2.0
