@@ -1,5 +1,5 @@
 {
     "show_version": true,
     "show_time": true,
-    "auto_greet": true
+    "auto_greet": false
 }

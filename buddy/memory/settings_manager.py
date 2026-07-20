@@ -37,15 +37,20 @@ def change_setting(key, value):
     expected_type = SETTINGS_METADATA.get(key, {}).get("type")
     if expected_type is None:
         return Status.INVALID_KEY.value
+        print(Status.INVALID_KEY.value)
 
     if not isinstance(value, expected_type):
         print("sahi data type daal ")
         return Status.INVALID_TYPE.value
+        print(Status.INVALID_TYPE.value)
 
     if settings.get(key) == value:
         print("pehle se vahi setting hai bhai 🙄")
         return Status.NO_CHANGE.value
+        print(Status.NO_CHANGE.value)
 
     settings[key] = value
     save_json(SETTINGS_FILE, settings)
     return Status.SUCCESS.value
+    print(Status.SUCCESS.value)
+    
