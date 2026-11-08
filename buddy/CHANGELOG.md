@@ -99,3 +99,28 @@ settings.json
 ```
 
 ---
+
+# v1.3.0 — Notes System
+**Release date:** 08 November 2026
+
+### Added
+- Introduced a dedicated Notes System.
+- Added note creation with title, body, and tags.
+- Added functionality to view saved notes.
+- Added functionality to update existing notes.
+- Added functionality to delete notes using their IDs.
+- Added note searching by title and body.
+- Added automatic note ID assignment.
+- Added creation timestamps for notes.
+- Added JSON-based note persistence using `notes.json`.
+- Added a dedicated Notes CLI menu.
+- Added `NoteStatus` enum to represent note operation results.
+
+### Technical
+- Created `buddy/notes/notes_manager.py` for note management.
+- Created `buddy/notes/notes_cli.py` for CLI interaction.
+- Reused the existing JSON storage manager.
+- Added a dedicated notes data file.
+
+### Project
+- Completed the v1.3.0 Notes System milestone.

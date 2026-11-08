@@ -8,4 +8,13 @@ class Status(Enum):
     INVALID_TYPE = "INVALID_TYPE"
     NO_CHANGE = "NO_CHANGE"
 
-print(Status.SUCCESS.value)
+# print(Status.SUCCESS.value)
+
+
+# notes 
+class NoteStatus(Enum):
+    NOTE_CREATED = "NOTE_CREATED"
+    NOTE_UPDATED = "NOTE_UPDATED"
+    NOTE_DELETED = "NOTE_DELETED"
+    NOTE_NOT_FOUND = "NOTE_NOT_FOUND"
+

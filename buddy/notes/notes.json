@@ -1,0 +1,25 @@
+{
+    "next_id": 3,
+    "notes": [
+        {
+            "id": 1,
+            "title": "My First Note for Testing",
+            "body": "This Note is for testing the new create note feature",
+            "tags": [
+                "Testing",
+                "New-Feature"
+            ],
+            "created_at": "2026-11-08T15:47:47"
+        },
+        {
+            "id": 2,
+            "title": "2nd note",
+            "body": "this note is again for testing (self satisfaction)",
+            "tags": [
+                "Testing",
+                "New-Feature"
+            ],
+            "created_at": "2026-11-08T15:50:34"
+        }
+    ]
+}

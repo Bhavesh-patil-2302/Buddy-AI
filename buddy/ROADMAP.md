@@ -9,7 +9,7 @@ Buddy Profile
 - JSON configuration
 
 Status:
-In Progress
+Completed
 
 ---------------------
 
@@ -21,7 +21,7 @@ Notes System
 - Delete note
 - Search notes
 
-Planned
+Completed
 
 ---------------------
 
@@ -38,9 +38,19 @@ Planned
 
 ---------------------
 
+## v1.5.0
+
+Conversation History
+
+- making the ai remember our last convo
+- entire converstation history stored
+
+---------------------
+
 ## v2.0.0
 
-Voice Assistant
+LLM Integration
 
-- Speech Recognition
-- Text To Speech
+- Integration of a Large language model to make it true AI
+- to support multi language texts and long context window
+

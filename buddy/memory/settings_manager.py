@@ -1,14 +1,14 @@
 from buddy.core.status import Status
 from buddy.memory.storage_manager import save_json, load_json
 from buddy.core.settings_metadata import SETTINGS_METADATA
-
+from buddy.core.paths import SETTINGS_FILE
 
 DEFAULT_SETTINGS = {
     "show_version": True,
     "show_time": True,
     "auto_greet": True
 }
-SETTINGS_FILE="buddy/data/settings.json"
+
 
 # create default settings file if it doesn't exist
 def create_default_settings():
