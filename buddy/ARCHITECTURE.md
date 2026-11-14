@@ -56,3 +56,10 @@ scanner/
 Responsible for
 
 - File scanning
+
+--------------------------------
+notes/
+
+- notes_manager.py - handles notes logic such as create, view ,update ,delete and searching queries
+- notes_cli - interacts with user ,acts as interface 
+- notes.json - notes are saved here in json format with creation time , id , title , content and tags of notes

@@ -6,6 +6,7 @@ from buddy.memory.user_memory import save_user_data , load_user_data
 from buddy.memory.settings_manager import change_setting, load_settings
 from buddy.core.settings_metadata import SETTINGS_METADATA
 from buddy.notes.notes_cli import notes_manager_menu
+from buddy.file_manager.file_manager_cli import file_manager_menu
 
 #preferences loading
 settings = load_settings()
@@ -50,6 +51,7 @@ def main_menu():
     print("6. Scan files in a folder")
     print("7. Modify Settings")
     print("8. Notes")
+    print("9. File Manager")
 
     # user input for menu selection
     choice = input("Please enter the number of your choice: ")
@@ -82,6 +84,9 @@ def main_menu():
     elif choice == "8":
         notes_manager_menu()
         
+
+    elif choice == "9":
+        file_manager_menu()
 
     else:
         print("Invalid choice. Please select a valid option from the menu.")

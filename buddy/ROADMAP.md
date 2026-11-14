@@ -34,7 +34,7 @@ File Manager
 - Copy
 - Move
 
-Planned
+In Progress
 
 ---------------------
 
