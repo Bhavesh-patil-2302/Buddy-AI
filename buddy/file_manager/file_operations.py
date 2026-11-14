@@ -1,3 +1,4 @@
+import os
 import shutil
 from pathlib import Path
 from buddy.core.status import FileStatus
@@ -11,6 +12,14 @@ def _final_destination(src, destination):
         dst = dst / src.name
     return dst
 
+def _is_inside(child, parent):
+    child = os.path.normcase(os.path.abspath(child))
+    parent = os.path.normcase(os.path.abspath(parent))
+    try:
+        return os.path.commonpath([child, parent]) == parent
+    except ValueError:  # different drives
+        return False
+
 # copy function to copy a file from source to destination
 def copy_file(source, destination):
     src = Path(source)
@@ -20,6 +29,10 @@ def copy_file(source, destination):
     dst = _final_destination(src, destination)
     if dst.exists():
         return FileStatus.DESTINATION_EXISTS
+    
+    
+    if src.is_dir() and _is_inside(dst, src):
+        return FileStatus.DESTINATION_INSIDE_SOURCE
 
     try:
         if src.is_dir():
@@ -41,6 +54,9 @@ def move_file(source, destination):
     dst = _final_destination(src, destination)
     if dst.exists():
         return FileStatus.DESTINATION_EXISTS
+    
+    if src.is_dir() and _is_inside(dst, src):
+        return FileStatus.DESTINATION_INSIDE_SOURCE
 
     try:
         shutil.move(str(src), str(dst))

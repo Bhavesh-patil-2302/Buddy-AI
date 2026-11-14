@@ -23,34 +23,46 @@ Notes System
 
 Completed
 
----------------------
 
-## v1.4.0
+-------------------------
 
-File Manager
+5. **v1.4 — File Manager**
+   - Completed
+   - File and directory operations
+   - Trash and restore system
+   - Sorting and filtering
+   - Filesystem safety and validation
 
-- Rename
-- Delete
-- Copy
-- Move
+released---
 
-In Progress
+6. **v1.5 — Conversation History**
+   - Upcoming
+   - Store previous conversations
+   - Browse conversation history
+   - Retrieve previous conversations
 
----------------------
+## v2.x — LLM Integration
+Natural-language understanding and intelligent command execution.
 
-## v1.5.0
+- Natural-language input processing
+- Structured intent recognition
+- Command routing
+- Context-aware interactions
+- Integration with existing Buddy AI modules
 
-Conversation History
+## v3.x — Voice Interface
+Voice interaction and hands-free assistant functionality.
 
-- making the ai remember our last convo
-- entire converstation history stored
+- Speech-to-text
+- Voice input processing
+- Voice interaction
+- Integration with the LLM layer
 
----------------------
+## Future Possibilities
 
-## v2.0.0
-
-LLM Integration
-
-- Integration of a Large language model to make it true AI
-- to support multi language texts and long context window
+- External application integrations
+- Music player integration
+- Advanced Notes integrations
+- Calendar integration
+- Extended system utilities
 

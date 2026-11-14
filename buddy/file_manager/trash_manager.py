@@ -11,8 +11,36 @@ from buddy.memory.storage_manager import load_json, save_json
 
 
 def _load_index():
+    # no index file yet = first run, start fresh
+    if not os.path.exists(TRASH_INDEX_FILE):
+        return copy.deepcopy(DEFAULT_TRASH)
+
+    # file exists but is unreadable or has the wrong shape = damaged
     data = load_json(TRASH_INDEX_FILE)
-    return data if data else copy.deepcopy(DEFAULT_TRASH)
+    if (not isinstance(data, dict)
+            or not isinstance(data.get("next_id"), int)
+            or not isinstance(data.get("items"), list)):
+        return None
+    return data
+
+
+def _find_item(index, item_id):
+    for item in index["items"]:
+        if isinstance(item, dict) and item.get("id") == item_id:
+            return item
+    return None
+
+
+def _stored_path(item):
+    # returns the path inside Trash for this item, or None if the record looks unsafe
+    name = item.get("stored_name")
+    if not isinstance(name, str) or not name or Path(name).name != name:
+        return None
+    files_dir = Path(os.path.abspath(TRASH_FILES_DIR))
+    path = Path(os.path.abspath(files_dir / name))
+    if path == files_dir or not path.is_relative_to(files_dir):
+        return None
+    return path
 
 
 def trash_item(path):
@@ -29,15 +57,21 @@ def trash_item(path):
             or src_real.is_relative_to(trash_real)
             or trash_real.is_relative_to(src_real)):
         return FileStatus.PROTECTED_PATH
-    
-    files_dir.mkdir(parents=True, exist_ok=True)
 
     index = _load_index()
+    if index is None:
+        return FileStatus.STORAGE_ERROR
+
+    files_dir.mkdir(parents=True, exist_ok=True)
+
     item_id = index["next_id"]
     stored_name = f"{item_id}_{src.name}"
+    target = files_dir / stored_name
+    if os.path.lexists(target):
+        return FileStatus.DESTINATION_EXISTS
 
     try:
-        shutil.move(str(src), str(files_dir / stored_name))
+        shutil.move(str(src), str(target))
     except OSError:
         return FileStatus.OPERATION_FAILED
 
@@ -53,52 +87,72 @@ def trash_item(path):
 
 
 def list_trash():
-    return _load_index()["items"]
+    # returns a list, or None if the index is damaged
+    index = _load_index()
+    if index is None:
+        return None
+    return index["items"]
 
 
 def restore_item(item_id):
     index = _load_index()
+    if index is None:
+        return FileStatus.STORAGE_ERROR
 
-    for item in index["items"]:
-        if item["id"] == item_id:
-            stored = Path(TRASH_FILES_DIR) / item["stored_name"]
-            original = Path(item["original_path"])
+    item = _find_item(index, item_id)
+    if item is None:
+        return FileStatus.TRASH_ITEM_NOT_FOUND
 
-            if not stored.exists():
-                return FileStatus.TRASH_ITEM_NOT_FOUND
-            if original.exists():
-                return FileStatus.DESTINATION_EXISTS
+    stored = _stored_path(item)
+    original_raw = item.get("original_path")
+    if stored is None or not isinstance(original_raw, str) or not original_raw:
+        return FileStatus.INVALID_RECORD
 
-            try:
-                original.parent.mkdir(parents=True, exist_ok=True)
-                shutil.move(str(stored), str(original))
-            except OSError:
-                return FileStatus.OPERATION_FAILED
+    if not os.path.lexists(stored):
+        return FileStatus.TRASH_ITEM_NOT_FOUND
 
-            index["items"].remove(item)
-            save_json(TRASH_INDEX_FILE, index)
-            return FileStatus.ITEM_RESTORED
+    original = Path(original_raw)
+    if os.path.lexists(original):
+        return FileStatus.DESTINATION_EXISTS
 
-    return FileStatus.TRASH_ITEM_NOT_FOUND
+    try:
+        original.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(stored), str(original))
+    except OSError:
+        return FileStatus.OPERATION_FAILED
+
+    index["items"].remove(item)
+    save_json(TRASH_INDEX_FILE, index)
+    return FileStatus.ITEM_RESTORED
 
 
 def delete_permanently(item_id):
     index = _load_index()
+    if index is None:
+        return FileStatus.STORAGE_ERROR
 
-    for item in index["items"]:
-        if item["id"] == item_id:
-            stored = Path(TRASH_FILES_DIR) / item["stored_name"]
+    item = _find_item(index, item_id)
+    if item is None:
+        return FileStatus.TRASH_ITEM_NOT_FOUND
 
-            try:
-                if stored.is_symlink() or stored.is_file():
-                    stored.unlink()
-                elif stored.is_dir():
-                    shutil.rmtree(stored)
-            except OSError:
-                return FileStatus.OPERATION_FAILED
+    stored = _stored_path(item)
+    if stored is None:
+        return FileStatus.INVALID_RECORD
 
-            index["items"].remove(item)
-            save_json(TRASH_INDEX_FILE, index)
-            return FileStatus.ITEM_PERMANENTLY_DELETED 
+    # the file is already gone: just clean the stale record, don't claim a delete
+    if not os.path.lexists(stored):
+        index["items"].remove(item)
+        save_json(TRASH_INDEX_FILE, index)
+        return FileStatus.STALE_RECORD_REMOVED
 
-    return FileStatus.TRASH_ITEM_NOT_FOUND
+    try:
+        if stored.is_symlink() or stored.is_file():
+            stored.unlink()
+        else:
+            shutil.rmtree(stored)
+    except OSError:
+        return FileStatus.OPERATION_FAILED
+
+    index["items"].remove(item)
+    save_json(TRASH_INDEX_FILE, index)
+    return FileStatus.ITEM_PERMANENTLY_DELETED

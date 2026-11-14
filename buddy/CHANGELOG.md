@@ -124,3 +124,47 @@ settings.json
 
 ### Project
 - Completed the v1.3.0 Notes System milestone.
+
+# Changelog
+
+## [1.4.0] - 2026-11-14 - 8.35 PM
+
+### Added
+- Introduced a dedicated File Manager module.
+- Added file and directory copying.
+- Added file and directory moving.
+- Added file and directory renaming.
+- Added directory creation.
+- Added structured directory scanning.
+- Added file information retrieval.
+- Added sorting by name, size, creation date, and modification date.
+- Added predefined file categories for filtering.
+- Added custom extension filtering.
+- Introduced a dedicated Trash system.
+- Added Trash listing functionality.
+- Added file and directory restoration.
+- Added permanent deletion from Trash with confirmation.
+- Added unique Trash item IDs.
+- Added original path and deletion timestamp tracking.
+- Added dedicated File Manager CLI menu.
+
+### Improved
+- Improved filesystem path validation.
+- Improved error handling for filesystem operations.
+- Improved handling of directory and symbolic-link operations.
+- Improved Trash metadata validation and persistence.
+- Added safeguards against unsafe directory operations.
+- Improved recovery and consistency handling for Trash operations.
+
+### Technical
+- Created dedicated modules for file operations, scanning, filtering, Trash management, and CLI interaction.
+- Reused the existing status and storage management systems.
+- Centralized file categories and sorting options.
+- Separated filesystem operations from CLI interaction.
+
+### Project
+- Completed the v1.4.0 File Manager milestone.
+
+---
+
+[Previous releases](#)
